@@ -1,0 +1,17 @@
+$dominioFQDN = "san-gva.es"
+$dominioNETBIOS = "SAN-GVA"
+$adminPass = "hplana-san-gva"
+Import-Module ADDSDeployment
+Install-ADDSForest `
+-CreateDnsDelegation:$False `
+-DatabasePath "C:\Windows\NTDS" `
+-DomainMode "Win2016" `
+-DomainName $dominioFQDN `
+-DomainNetbiosName $dominioNETBIOS `
+-SafeModeAdministratorPassword (ConvertTo-SecureString -string $adminPass -AsPlainText -Force)
+-ForestMode "Win2016" `
+-InstallDns:$True `
+-LogPath "C:\Windows\NTDS" `
+-NoRebootOnCompletion:$False `
+-SysvolPath "C:\Windows\SYSVOL" `
+-Force:$true 
